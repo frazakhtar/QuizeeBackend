@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-app.use('/api/user', UserRoute);
+app.use('/api', UserRoute);
 
 
 app.use((data, req, res, next) => {
