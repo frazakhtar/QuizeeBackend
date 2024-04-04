@@ -4,8 +4,10 @@ let Bcrypt = require("bcrypt");
 let jwt = require("jsonwebtoken");
 
 let loginUser = (userDetails) => {
+  console.log('-------->>>> ',userDetails)
   return new Promise((resolve, reject) => {
-    UserSchema.findOne({ user_name: userDetails.userName }).then((user) => {
+    UserSchema.findOne({ email: userDetails.email }).then((user) => {
+      console.log('-------->>>> ',user)
       if (!user) {
         return resolve("User Not Found");
       }
@@ -15,7 +17,7 @@ let loginUser = (userDetails) => {
             resolve("User credentials not match");
           }
           const token = jwt.sign(
-            { userName: user.user_name, userId: user._id },
+            { email: user.email, userId: user._id },
             "JAY_SIYA_RAM",
             {
               expiresIn: "30m",
@@ -23,7 +25,6 @@ let loginUser = (userDetails) => {
           );
           let userResponse = {
             token: token,
-            userName: user.user_name,
             email: user.email,
             userId: user._id,
             role: user.role
@@ -49,7 +50,7 @@ let signUp = (userDetails) => {
           .then((result) => {
             if (result) {
               const token = jwt.sign(
-                { userName: result.user_name, userId: result._id },
+                { email: result.email, userId: result._id },
                 "JAY_SIYA_RAM",
                 {
                   expiresIn: "30m",
@@ -57,7 +58,6 @@ let signUp = (userDetails) => {
               );
               let userResponse = {
                 token: token,
-                userName: result.user_name,
                 email: result.email,
                 userId: result._id,
                 role: result.role

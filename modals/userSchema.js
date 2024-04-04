@@ -1,11 +1,6 @@
 let mongoose = require('mongoose');;
 let Schema = mongoose.Schema;
 let loginSchema = Schema({
-    userName: {
-        type: String,
-        required: true,
-        unique: true
-    },
     password: {
         type: String,
         required: true

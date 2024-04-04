@@ -31,7 +31,6 @@ router.post("/login", (req, res) => {
 router.post("/register", (req, res) => {
   if (req.body) {
     let userInfo = {
-      user_name: req.body.userName,
       password: req.body.password,
       email: req.body.email,
       role: "user",
